@@ -25,6 +25,7 @@ api.login = async (req, res) => {
 
 api.register = async (req, res) => {
     const user = req.body;
+    console.log(user)
     const userId = await new UserDao(req.db).add(user);
     res.status(204).end();
 };

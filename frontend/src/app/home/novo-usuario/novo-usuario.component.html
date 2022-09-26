@@ -3,15 +3,61 @@
 <form class="form mt-4" [formGroup]="novoUsuarioForm" (submit)="cadastrar()">
   <div class="form-group">
     <input placeholder="E-mail" type="text" class="form-control" formControlName="email">
+    <app-mensagem
+      *ngIf="
+        novoUsuarioForm.get('email')?.errors?.['required'] &&
+        novoUsuarioForm.get('email')?.touched
+        "
+      mensagem="Email obrigatório"
+    ></app-mensagem>
+    <app-mensagem
+      *ngIf="
+        novoUsuarioForm.get('email')?.errors?.['email'] &&
+        novoUsuarioForm.get('email')?.touched
+        "
+      mensagem="E-mail no formato incorreto"
+    ></app-mensagem>
   </div>
   <div class="form-group">
     <input placeholder="Nome Completo" type="text" class="form-control" formControlName="fullName">
+    <app-mensagem 
+      *ngIf="
+        novoUsuarioForm.get('fullName')?.errors?.['required'] &&
+        novoUsuarioForm.get('fullName')?.touched
+      "
+      mensagem="Nome Obrigatório"
+    ></app-mensagem>
   </div>
   <div class="form-group">
-    <input placeholder="Usuário" type="text" class="form-control" formControName="userName">
+    <input placeholder="Usuário" type="text" class="form-control" formControlName="userName">
+    <app-mensagem
+      *ngIf="
+        novoUsuarioForm.get('userName')?.errors?.['required'] &&
+        novoUsuarioForm.get('userName')?.touched
+      "
+      mensagem="Campo obrigatorio"
+    ></app-mensagem>
+    <app-mensagem
+      *ngIf="
+        novoUsuarioForm.get('userName')?.errors?.['minusculo']
+      "
+      mensagem="Deve ter apenas letras minusculas"
+    ></app-mensagem>
+    
+    <app-mensagem
+      *ngIf="
+        novoUsuarioForm.get('userName')?.errors?.['usuarioExistente']
+      "
+      mensagem="Usuário já existe"
+    ></app-mensagem>
+    
   </div>
   <div class="form-group">
     <input type="password" placeholder="Senha" class="form-control" formControlName="password">
+    <app-mensagem
+      *ngIf="novoUsuarioForm.errors?.['senhaIgualUsuario']"
+      mensagem="Senha deve ser diferente do usuário."
+    ></app-mensagem>
   </div>
   <button class="btn btn-primary btn-block">Cadastrar</button>
 </form>

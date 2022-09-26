@@ -10,7 +10,12 @@ export class NovoUsuarioService {
   constructor(private httpClient: HttpClient) { }
 
   cadastraNovoUsuario(novoUsuario: NovoUsuario){
-    const url = `${this.API}/user/singup`
+    const url = `${this.API}/user/signup`
     return this.httpClient.post(url, novoUsuario)
+  }
+
+  verificaUsuarioExistente(usuario: string){
+    const url = `${this.API}/user/exists/${usuario}`
+    return this.httpClient.get(url)
   }
 }
